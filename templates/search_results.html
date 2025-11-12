@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Search Results for "{{ search_term }}"</h2>
+    {% if matches %}
+        <p>We found **{{ matches|length }}** item(s) that match your search. Review the details below to see if it's yours.</p>
+        {% for item in matches %}
+            <div class="item-card">
+                <h3>{{ item.item_name }} ({{ item.category }})</h3>
+                <p><strong>Description:</strong> {{ item.description }}</p>
+                <p><strong>Location Found:</strong> {{ item.location_found }}</p>
+                <p><strong>Date Found:</strong> {{ item.date_found }}</p>
+
+                <form method="POST" action="{{ url_for('claim_item', item_id=item.id) }}">
+                    <button type="submit" class="button success">Claim This Item (Send Finder's Details to My Email)</button>
+                </form>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No matching items were found. Try a different search term.</p>
+    {% endif %}
+{% endblock %}
