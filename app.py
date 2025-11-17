@@ -1,10 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from werkzeug.security import generate_password_hash, check_password_hash
-from functools import wraps
-from datetime import datetime
-from PIL import Image
+
 import imagehash
 import os
 import uuid
@@ -12,9 +9,7 @@ import uuid
 # --- Flask App Configuration ---
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default_secret_key_change_me')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///search.sqlite'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
+
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
