@@ -122,7 +122,6 @@ def logout():
     flash('You have been logged out.', 'success')
     return redirect(url_for('index'))
 
-# --- Admin Routes ---
 @app.route('/admin_signup', methods=['GET', 'POST'])
 def admin_signup():
     if current_user.is_authenticated:
@@ -249,7 +248,7 @@ def claim_item(item_id):
     item.owner_id = current_user.id
     try:
         db.session.commit()
-        flash(f"Claim successful! Finder contact: Email {finder.email}, Username {finder.username}", 'success')
+        flash(f"Claim successful! Finder contact please contact oluebubechukwuanastesia@gmail.com: Email {finder.email}, Username {finder.username}", 'success')
     except Exception:
         db.session.rollback()
         flash('Error processing claim.', 'danger')

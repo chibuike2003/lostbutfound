@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Search Results for "{{ search_term }}"</h2>
+     {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class="flashes">
+                        {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
     {% if matches %}
         <p>We found **{{ matches|length }}** item(s) that match your search. Review the details below to see if it's yours.</p>
         {% for item in matches %}
